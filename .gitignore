@@ -4,3 +4,4 @@ nodejs-mongodb-demo.iml
 npm-debug.log
 
 .env
+/infra/.terraform.lock.hcl
