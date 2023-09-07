@@ -26,6 +26,37 @@ When I wan the app with --trace-warnings flag, I noticed that the warnings comes
 (Use `node --trace-warnings ...` to show where the warning was created)
 Ok #yay!
 ```
-I took the freedom to add the desired option to the mongodb constructor so we avoid breaking future versions, after that I just opened localhost:3000 in my browser and Successfully see the two ending values, now we need head to deploying at AWS
+I took the freedom to add the desired option to the mongodb constructor so we avoid breaking future versions, after that I just opened localhost:3000 in my browser and Successfully see the two ending values, now we need head to dockerize the app & deploying at AWS
 
 # 5
+I created Dockerfile, run a localtest to check if the image is running correctly, with the successful test, I'm creating first the infrastructure related to the image build (ECR + pipeline)
+
+# 6 
+Crated [./infra folder](./infra/) that contains our terraform files, we'll be using terraform to provision our infrastructure resources to allow our app be hosted via an ECS cluster. But before we can automate, we need to setup our AWS account so we can use terraform on it.
+
+I created an IAM Account, with permissions for deploying so we can use as user service for our automation, after that, we need to create a S3 bucket so we can store our tfstate file from terraform, I created one named *hiringdevops-terraform*. Now we just need to configure at our provider:
+
+```hcl
+terraform {
+
+  required_providers {
+    aws = {
+      source  = "hashicorp/aws"
+      version = "~> 5.0"
+    }
+  }
+
+  backend "s3" {
+    bucket     = "hiringdevops-terraform"
+    key        = "infra/hiring-devops"
+    region     = "us-east-2"
+  }
+
+}
+
+provider "aws" {
+  region     = "us-east-2"
+}
+```
+
+Now we can start defining our infrastructure via terraform, first I exported locally my aws keys that I've previously created at IAM, and run `terraform init`, after sucessfuly initilalized the project, I created the terraform's boilerplate + ECR project, and applied to create our ECR Registry
