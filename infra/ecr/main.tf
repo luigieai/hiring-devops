@@ -15,7 +15,4 @@ resource "aws_ecr_repository" "hiringdevops" {
     scan_on_push = true
   }
 
-  tags = {
-    "project" = "hiring-devops"
-  }
 }

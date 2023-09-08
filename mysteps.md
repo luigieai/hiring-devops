@@ -59,4 +59,6 @@ provider "aws" {
 }
 ```
 
-Now we can start defining our infrastructure via terraform, first I exported locally my aws keys that I've previously created at IAM, and run `terraform init`, after sucessfuly initilalized the project, I created the terraform's boilerplate + ECR project, and applied to create our ECR Registry
+Now we can start defining our infrastructure via terraform, first I exported locally my aws keys that I've previously created at IAM, and run `terraform init`, after we initilalized the project, I created the terraform's boilerplate + ECR project, and applied to create our ECR Registry
+
+# 7 
