@@ -11,3 +11,10 @@ module "network" {
     aws = aws
   }
 }
+
+module "ecs" {
+  source = "./ecs"
+  providers = {
+    aws = aws
+  }
+}
