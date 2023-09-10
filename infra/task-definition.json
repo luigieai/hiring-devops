@@ -1,0 +1,28 @@
+{
+    "containerDefinitions": [ 
+       { 
+          
+          "essential": true,
+          "image": "335617278903.dkr.ecr.us-east-2.amazonaws.com/hiring-devops",
+          "name": "hiring-devops",
+          "portMappings": [ 
+             { 
+                "containerPort": 3000,
+                "hostPort": 80,
+                "protocol": "tcp"
+             }
+          ]
+       }
+    ],
+    "cpu": "256",
+    "executionRoleArn": "arn:aws:iam::335617278903:role/hiring-devops-task_execution_role",
+    "family": "hiring-devops",
+    "memory": "512",
+    "networkMode": "awsvpc",
+    "runtimePlatform": {
+         "operatingSystemFamily": "LINUX"
+     },
+    "requiresCompatibilities": [ 
+        "FARGATE" 
+     ]
+ }
