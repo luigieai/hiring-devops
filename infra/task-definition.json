@@ -17,7 +17,7 @@
     "cpu": "256",
     "executionRoleArn": "arn:aws:iam::335617278903:role/hiring-devops-task_execution_role",
     "family": "hiring-devops",
-    "memory": "512",
+    "memory": "300",
     "runtimePlatform": {
          "operatingSystemFamily": "LINUX"
      }
