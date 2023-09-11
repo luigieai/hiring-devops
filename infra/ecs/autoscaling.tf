@@ -10,7 +10,7 @@ module "autoscaling" {
   use_mixed_instances_policy = false
   mixed_instances_policy     = {}
   user_data                  = filebase64("${path.module}/user_data.tpl")
-
+  
   name = "hiring-devops"
 
   image_id = jsondecode(data.aws_ssm_parameter.ecs_optimized_ami.value)["image_id"]

@@ -51,6 +51,7 @@ resource "aws_subnet" "alb_public_subnet_2" {
 resource "aws_subnet" "ecs_private_subnet" {
   vpc_id                  = aws_vpc.vpc.id
   cidr_block              = "10.0.3.0/24"
+  availability_zone = "us-east-2a"
   map_public_ip_on_launch = false
 }
 
