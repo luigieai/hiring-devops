@@ -62,3 +62,16 @@ provider "aws" {
 Now we can start defining our infrastructure via terraform, first I exported locally my aws keys that I've previously created at IAM, and run `terraform init`, after we initilalized the project, I created the terraform's boilerplate + ECR project, and applied to create our ECR Registry
 
 # 7 
+## Terraform
+At this point, we get to code a lot! I created all the infrastructure using terraform, you can check it out in [infra folder](./infra/), I've never created an ECS cluster using EC2 and autoscaling groups, it's the part I've spent most of my time with trouble, so I've just used an provided [terraform autoscaling module](https://registry.terraform.io/modules/terraform-aws-modules/autoscaling/aws/latest) and I managed to get EC2 instance working properly. I could created an EC2 instance without autoscaling and registered as an ECS Anywhere instance, but I designed the infrastructure to be less complicated as possible but able to scale without headache, because of that, I taught it's better to stick with autoscaling for now. I created a VPC with 3 subnets, 2 subnets are in different availability zones from us-east-2, so we can deploy our Application Load Balancer, and the last is an private subnet for our EC2 instance, after that we create our ALB with health check, our application does not have any healthcheck path so we can check the initial (and only) page! And finally our ECS Cluster, where our TaskDefinition is only a dummy created taskdefinition so we can update later on CI/CD. We can get our LB Url and general info for CI/CD running an ```terraform output```!
+
+Also with modules structuring, we have more files to manage but the infra can be easily cloned for any reason, like an QA/Staging environment! 
+
+## CI/CD
+We are using Github Actions for our CI/CD, fortunely there's a ton of actions available, so the process of writing our yaml file was simple and fast. At our CI/CD we basically have 2 things going on: 
+- We dockerize our app and upload to our ECR Registry, we tag our images using the commit SHA, so in that way, we can easily rollback our application if anything goes wrong, and have previously versions stored in the registry.
+- We take [task-definition.json](./infra/task-definition.json) and render it with our new image builded, and deploy to our ECS cluster.
+
+With this, the separate file is the source of truth when we are dealing strictly with task definitions in our cluster, but we have the upside to automating our deployment with pipelines!
+
+#8 
