@@ -24,6 +24,7 @@ module "autoscaling" {
   iam_role_policies = {
     AmazonEC2ContainerServiceforEC2Role = "arn:aws:iam::aws:policy/service-role/AmazonEC2ContainerServiceforEC2Role"
     AmazonSSMManagedInstanceCore        = "arn:aws:iam::aws:policy/AmazonSSMManagedInstanceCore"
+    AmazonEC2ContainerRegistryReadOnly = data.aws_iam_policy.ecr_access.arn
   }
 
   vpc_zone_identifier = var.subnet_ids
