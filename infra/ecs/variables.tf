@@ -5,10 +5,15 @@ variable "security_groups_id" {
 
 variable "subnet_ids" {
   type        = list(string)
-  description = "Ids of subnet that CEW will be created"
+  description = "Ids of subnet that AutoscalingECS will be created"
 }
 
 variable "ecr_arn" {
-  type = string
+  type        = string
   description = "ECR ARN for crating IAM policy"
+}
+
+variable "alb_targetgroup_arn" {
+  type        = string
+  description = "ALB Arn for ECS Service"
 }

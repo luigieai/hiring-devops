@@ -11,6 +11,8 @@ resource "aws_ecs_cluster" "hiring_devops" {
   name = "hiring-devops"
 
 }
+
+### This task is deployed via CI/CD of hiring-devops project
 resource "aws_ecs_task_definition" "dummy" {
   family             = "hiring-devops"
   cpu                = 256
@@ -25,8 +27,8 @@ resource "aws_ecs_task_definition" "dummy" {
     "image": "public.ecr.aws/aws-containers/ecsdemo-frontend:776fd50",
     "essential": true,
     "portMappings": [{
-      "containerPort": 80,
-      "hostPort": 80
+      "containerPort": 3000,
+      "hostPort": 0
     }]
   }
 ]
@@ -35,13 +37,18 @@ DEFINITION
 }
 
 resource "aws_ecs_service" "service" {
-  name        = "hiring-devops"
-  launch_type = "EC2"
+  name            = "hiring-devops"
+  launch_type     = "EC2"
   cluster         = aws_ecs_cluster.hiring_devops.id
   task_definition = aws_ecs_task_definition.dummy.arn
   desired_count   = 1
 
-  //  lifecycle {
-  //    ignore_changes = [task_definition]
-  //  }
+  load_balancer {
+    target_group_arn = var.alb_targetgroup_arn
+    container_name   = "hiring-devops"
+    container_port   = 3000
+  }
+  lifecycle {
+    ignore_changes = [task_definition]
+  }
 }
