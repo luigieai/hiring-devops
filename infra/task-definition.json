@@ -1,12 +1,6 @@
 {
     "containerDefinitions": [ 
        { 
-         "environment": [
-            {
-               "name": "MONGODB_ADDON_URI",
-               "value": "<MONGO_URI>"
-            }
-          ],
           "essential": true,
           "image": "335617278903.dkr.ecr.us-east-2.amazonaws.com/hiring-devops",
           "name": "hiring-devops",

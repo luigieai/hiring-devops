@@ -2,6 +2,3 @@
 infra/
 node_modules/
 npm-debug.log
-.env
-
-MONGODB_ADDON_URI="mongodb://luigima:meteorhiringdevops@SG-meteor-prod-hiring-59080.servers.mongodirector.com:27017/luigima"
