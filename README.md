@@ -1,3 +1,10 @@
+# Challenger notes 
+You can find my personal notes that I wrote when resolving this challenge, feel free to use read it at [mysteps.md](./mysteps.md), **you can jump to last step to read it about bonus task completion**
+
+If you wanna setup the infra by yourself or check all the infrastructure related code, head to [infra folder](./infra/).
+
+The app is running at: http://hiring-devops-alb-581306687.us-east-2.elb.amazonaws.com/
+
 # Recruitment for Meteor DevOps Engineer
 
 This task is intended for candidates applying for the DevOps Engineer position on the Meteor team.
