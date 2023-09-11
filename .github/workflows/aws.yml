@@ -37,7 +37,7 @@ jobs:
     - name: Overwrite file
       uses: "DamianReeves/write-file-action@master"
       with:
-        path: path/to/file.js
+        path: .env
         write-mode: overwrite
         contents: |
           MONGODB_ADDON_URI=$MONGO_URI
