@@ -40,7 +40,7 @@ jobs:
         path: .env
         write-mode: overwrite
         contents: |
-          MONGODB_ADDON_URI=$MONGO_URI
+          MONGODB_ADDON_URI=${{ secrets.SSH_KEY }}
       env:
         MONGO_URI: ${{secrets.MONGO_URI}}
 
