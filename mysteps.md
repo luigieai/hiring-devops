@@ -74,4 +74,31 @@ We are using Github Actions for our CI/CD, fortunely there's a ton of actions av
 
 With this, the separate file is the source of truth when we are dealing strictly with task definitions in our cluster, but we have the upside to automating our deployment with pipelines!
 
-#8 
+# 8 
+Now we are at bonus task! Migrating data from an mongodb server for another! First I took a look at our structure within MongoDB Compass, after checking it out, I've installed MongoDB database tools:
+```shell
+wget https://fastdl.mongodb.org/tools/db/mongodb-database-tools-ubuntu2004-x86_64-100.8.0.deb
+sudo apt install ./mongodb-database-tools-*-100.8.0.deb
+```
+
+After that, I checked both mongodb version:
+```shell
+#old database
+db.version()
+6.0.9
+
+#new database
+db.version()
+6.0.5
+```
+As we have same major version, we confirm that we can migrate the data using *mongodump* and *mongorestore* for migrating the database. Looking at our app code, I see that we use the database called *message*, and checking out the database I see two collections, *sensitive_auths* (with 55000 records) and *values* (with 2 records). We need to migrate these two collections! With mongo database tools the task is very easy, first we need to export the database:
+
+```shell
+mongodump --uri="$OLD_URI" --db=message
+```
+This will create a folder called dump/message. Now we just import to our new database with *mongorestore*
+```shell
+mongorestore --uri="$NEW_URI" --nsInclude=luigima.sensitive_auths dump/message/
+```
+
+After that, just update the .env of the app, and commit to github, the pipeline will automatically update the app!
