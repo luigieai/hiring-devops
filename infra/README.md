@@ -55,6 +55,7 @@ If the apply is sucessful, we have our ECS cluster running using one t2.micro EC
 First go to the projects *settings* > *Secrets and variables* > *Actions*. Now create two new secrets clicking in the button called *New Repository Secret*, the secrets should be named
 - AWS_ACCESS_KEY_ID 
 - AWS_SECRET_ACCESS_KEY
+- MONGO_URI
 And populate the secrets with AWS keys previously created. 
 
 Go ahead to our [pipeline file](../.github/workflows/aws.yml) and configure the Environment Variables with our terraform output informations, an example:
