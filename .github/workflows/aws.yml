@@ -34,9 +34,13 @@ jobs:
         aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         aws-region: ${{ env.AWS_REGION }}
     
-    - name: Add secrets to .env
-      run: |
-        echo 'MONGODB_ADDON_URI=$MONGO_URI' >> .env"
+    - name: Overwrite file
+      uses: "DamianReeves/write-file-action@master"
+      with:
+        path: path/to/file.js
+        write-mode: overwrite
+        contents: |
+          MONGODB_ADDON_URI=$MONGO_URI
       env:
         MONGO_URI: ${{secrets.MONGO_URI}}
 
