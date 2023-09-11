@@ -36,7 +36,7 @@ jobs:
     
     - name: Add secrets to .env
       run: |
-        echo "MONGODB_ADDON_URI=$MONGO_URI""
+        echo 'MONGODB_ADDON_URI=$MONGO_URI' >> .env"
       env:
         MONGO_URI: ${{secrets.MONGO_URI}}
 
