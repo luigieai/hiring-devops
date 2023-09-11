@@ -6,7 +6,7 @@ module "autoscaling" {
   source  = "terraform-aws-modules/autoscaling/aws"
   version = "6.10.0"
 
-  instance_type              = "t2.micro"
+  instance_type              = "t3.micro"
   use_mixed_instances_policy = false
   mixed_instances_policy     = {}
   user_data                  = filebase64("${path.module}/user_data.tpl")

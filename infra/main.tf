@@ -19,6 +19,7 @@ module "ecs" {
   }
   security_groups_id = [module.network.ecs_subnet_sg_id]
   subnet_ids         = [module.network.ecs_subnet_id]
+  ecr_arn = module.ecr.ecr_arn
 }
 
 output "ecr_repository_url" {

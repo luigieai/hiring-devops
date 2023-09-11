@@ -17,6 +17,3 @@ resource "aws_ecr_repository" "hiringdevops" {
 
 }
 
-output "repository_url" {
-  value = aws_ecr_repository.hiringdevops.repository_url
-}
